@@ -11,14 +11,21 @@ Quick start
 
 Suppose you have an xlsx:
 
-    | CUSTOMER FIRST NAME | CUSTOMER SURNAME |
-    | John | Black |
-    | Jack | Red |
-    | Tom | Green |
++---------------------+------------------+
+| CUSTOMER FIRST NAME | CUSTOMER SURNAME |
++=====================+==================+
+| John                | Black            |
++---------------------+------------------+
+| Jack                | Red              |
++---------------------+------------------+
+| Tom                 | Green            |
++---------------------+------------------+
 
 and want to load the data into MyModel
 
 MyModel should have an XLSX_2_FIELDS attribute to remap column-names to field-names
+
+::
 
     class MyModel(models.Model):
         name = models.CharField(max_length=50)
@@ -30,6 +37,8 @@ MyModel should have an XLSX_2_FIELDS attribute to remap column-names to field-na
         }
 
 now you can load...
+
+::
 
     import openpyxl as pyx
     import xlsx
