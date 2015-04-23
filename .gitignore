@@ -1,0 +1,14 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Vim support files
+*.swp
+.ropeproject/*
+
+# Temporary sample files
+testproj/sample.xlsx
+
+# Distribution files
+dist/*
+django_xslx.egg-info/*
