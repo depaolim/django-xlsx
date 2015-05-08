@@ -45,3 +45,7 @@ now you can load...
 
     wb = pyx.load_workbook("sample.xslsx")
     xlsx.load(MyModel, wb.active.rows)
+
+
+You can specify an optional preprocessor as 3rd parameter to the "load" function
+This can be usefull to adjust some fields before inserting to db
