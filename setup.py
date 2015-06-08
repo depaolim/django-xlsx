@@ -15,13 +15,13 @@ CLASSIFIERS = [
 ]
 
 setup(
-    name='django-xslx',
-    version='0.0.2',
+    name='django-xlsx',
+    version='0.0.3',
     packages=find_packages(),
     include_package_data=True,
     license='BSD License',
     description='Django import/export to Excel files',
-    url='https://github.com/depaolim/django_xslx',
+    url='https://github.com/depaolim/django-xlsx',
     author="Marco De Paoli",
     author_email="depaolim@gmail.com",
     platforms=['OS Independent'],
