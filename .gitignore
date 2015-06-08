@@ -11,4 +11,4 @@ testproj/sample.xlsx
 
 # Distribution files
 dist/*
-django_xslx.egg-info/*
+django_xlsx.egg-info/*
