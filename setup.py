@@ -16,7 +16,7 @@ CLASSIFIERS = [
 
 setup(
     name='django-xlsx',
-    version='0.0.3',
+    version='0.0.4',
     packages=find_packages(),
     include_package_data=True,
     license='BSD License',
