@@ -23,14 +23,14 @@ class TestIterate(TestCase):
             [Mock(column="A", value="N2"), Mock(column="B", value="78")],
         ]
         REMAP_COL_TO_FIELD = {'NAME': "FIELD_A", "ID_MAS": "FIELD_B"}
-        it = Iterator(REMAP_COL_TO_FIELD.get, lambda dr, linenumber: None)
+        it = Iterator(REMAP_COL_TO_FIELD.get, lambda dr: None)
         i = it(rows, _get=lambda f, v: (f, v))
         self.assertEqual(i.next(), {"FIELD_A": "N1", "FIELD_B": "99"})
         self.assertEqual(i.next(), {"FIELD_A": "N2", "FIELD_B": "78"})
         self.assertRaises(StopIteration, i.next)
 
     def test_with_processor(self):
-        def dummy_process(dr, linenumber):
+        def dummy_process(dr):
             if dr["FIELD_A"] == "N1":
                 dr["FIELD_B"] = "N1_{}".format(dr["FIELD_B"])
 
@@ -45,21 +45,6 @@ class TestIterate(TestCase):
         self.assertEqual(i.next(), {"FIELD_A": "N1", "FIELD_B": "N1_99"})
         self.assertEqual(i.next(), {"FIELD_A": "N2", "FIELD_B": "78"})
         self.assertRaises(StopIteration, i.next)
-
-    def test_with_processor_raises_error_with_linenumber(self):
-        def dummy_process(dr, linenumber):
-            assert linenumber != 1, "error on line {}".format(linenumber + 1)
-
-        rows = [
-            [Mock(column="A", value="NAME"), Mock(column="B", value="ID_MAS")],
-            [Mock(column="A", value="N1"), Mock(column="B", value="99")],
-            [Mock(column="A", value="N2"), Mock(column="B", value="78")],
-        ]
-        REMAP_COL_TO_FIELD = {'NAME': "FIELD_A", "ID_MAS": "FIELD_B"}
-        it = Iterator(REMAP_COL_TO_FIELD.get, dummy_process)
-        i = it(rows, _get=lambda f, v: (f, v))
-        self.assertEqual(i.next(), {"FIELD_A": "N1", "FIELD_B": "99"})
-        self.assertRaisesRegexp(AssertionError, "error on line 2", i.next)
 
 
 class SampleMaster(models.Model):
@@ -123,7 +108,7 @@ class TestSampleModelUnit(TestCase):
             ])
 
     def test_load_with_preprocess(self):
-        def dummy_preprocess(dr, ln):
+        def dummy_preprocess(dr):
             dr["name"] = "{}_{}".format(dr["name"], dr["master_id"])
 
         rows = [
